@@ -1,0 +1,23 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    # choose OS
+    runs-on: ubuntu-latest
+
+    steps:
+      # clone repo to new OS
+      - uses: actions/checkout@v3
+      # install node
+      - name: Setup Node
+        uses: actions/setup-node@v3
+      # similar to npm install
+      - run: npm ci
+      # run tests
+      - run: npm test
