@@ -13,11 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # clone repo to new OS
+      # clone repo to new VM
       - uses: actions/checkout@v3
       # install node
       - name: Setup Node
         uses: actions/setup-node@v3
+      # cache dependencies
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm
+          # if hash of package lock hasn't changed, use the cache
+          key: npm-${{ hashFiles('**/package-lock.json') }}
       # similar to npm install
       - run: npm ci
       # build
@@ -28,11 +35,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # clone repo to new OS
+      # clone repo to new VM
       - uses: actions/checkout@v3
       # install node
       - name: Setup Node
         uses: actions/setup-node@v3
+      # cache dependencies
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ~/.npm
+          # if hash of package lock hasn't changed, use the cache
+          key: npm-${{ hashFiles('**/package-lock.json') }}
       # similar to npm install
       - run: npm ci
       # run tests
