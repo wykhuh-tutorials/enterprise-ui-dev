@@ -18,13 +18,10 @@ jobs:
       # install node
       - name: Setup Node
         uses: actions/setup-node@v3
-      # cache dependencies
-      - uses: actions/cache@v3
-        id: npm-cache
+        #  cache dependencies
         with:
-          path: ~/.npm
-          # if hash of package lock hasn't changed, use the cache
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          node-version: 20
+          cache: "npm"
       # similar to npm install
       - run: npm ci
       # build
@@ -40,13 +37,10 @@ jobs:
       # install node
       - name: Setup Node
         uses: actions/setup-node@v3
-      # cache dependencies
-      - uses: actions/cache@v3
-        id: npm-cache
+        #  cache dependencies
         with:
-          path: ~/.npm
-          # if hash of package lock hasn't changed, use the cache
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          node-version: 20
+          cache: "npm"
       # similar to npm install
       - run: npm ci
       # run tests
